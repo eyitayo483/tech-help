@@ -29,44 +29,43 @@ export default function Home() {
     <main>
       {/* HERO */}
       <section className="relative overflow-hidden bg-slate-950 text-white">
-        {/* grid pattern */}
+        {/* background image */}
         <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         />
-        {/* glowing shapes */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-cyan-500/30 blur-3xl" />
-        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-violet-600/30 blur-3xl" />
+        {/* dark layer so the text is easy to read */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/90" />
 
-        <div className="relative max-w-4xl mx-auto px-5 py-24 md:py-36 text-center">
-          <p className="inline-block rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-1 text-sm text-cyan-300">
+        {/* soft glowing shapes */}
+        <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-teal-700/20 blur-3xl" />
+        <div className="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-700/20 blur-3xl" />
+
+        <div className="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-36">
+          <p className="inline-block rounded-full border border-teal-300/30 bg-teal-300/10 px-4 py-1 text-sm text-teal-200">
             Tech help, from people who've been there
           </p>
-          <h1 className="mt-6 text-4xl md:text-6xl font-bold leading-tight">
+          <h1 className="mt-6 text-4xl font-bold leading-tight md:text-6xl">
             Solve your tech problems{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-teal-300 to-indigo-300 bg-clip-text text-transparent">
               together
             </span>
           </h1>
-          <p className="mt-5 text-slate-300 text-lg max-w-2xl mx-auto">
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-300">
             Ask questions, share solutions and get help from a community that
             loves fixing things.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/signin"
-              className="flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-slate-950 hover:bg-cyan-400 transition"
+              className="flex items-center justify-center gap-2 rounded-xl bg-teal-700 px-7 py-3 font-semibold text-white transition hover:bg-teal-600"
             >
               Get started <FaArrowRight />
             </Link>
             <Link
               href="/about"
-              className="rounded-xl border border-white/20 px-7 py-3 font-semibold hover:bg-white/10 transition"
+              className="rounded-xl border border-white/20 px-7 py-3 font-semibold transition hover:bg-white/10"
             >
               Learn more
             </Link>
@@ -75,17 +74,17 @@ export default function Home() {
       </section>
 
       {/* FEATURES */}
-      <section className="max-w-6xl mx-auto px-5 py-16 md:py-24">
-        <h2 className="text-3xl font-bold text-center text-slate-900">
+      <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+        <h2 className="text-center text-3xl font-bold text-slate-900">
           How TechHelp works
         </h2>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition"
+              className="rounded-2xl border border-slate-200 p-7 shadow-sm transition hover:shadow-md"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-100 text-2xl text-cyan-700">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-2xl text-teal-700">
                 {f.icon}
               </div>
               <h3 className="mt-5 text-xl font-semibold text-slate-900">

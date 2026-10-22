@@ -9,6 +9,7 @@ import {
   FaEyeSlash,
   FaArrowLeft,
 } from "react-icons/fa";
+import { googleSignIn } from "../actions";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,13 +19,8 @@ export default function SignIn() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // backend comes later
+    // email/password login comes later
     console.log("Signing in with:", { email, password, remember });
-  }
-
-  function handleGoogle() {
-    // Google sign-in comes later
-    console.log("Google sign-in clicked");
   }
 
   return (
@@ -60,13 +56,14 @@ export default function SignIn() {
         </p>
 
         {/* Google */}
-        <button
-          type="button"
-          onClick={handleGoogle}
-          className="mt-8 flex w-full items-center justify-center gap-3 rounded-xl bg-white px-5 py-3 font-medium text-slate-900 transition hover:bg-slate-100"
-        >
-          <FcGoogle className="text-2xl" /> Continue with Google
-        </button>
+        <form action={googleSignIn}>
+          <button
+            type="submit"
+            className="mt-8 flex w-full items-center justify-center gap-3 rounded-xl bg-white px-5 py-3 font-medium text-slate-900 transition hover:bg-slate-100"
+          >
+            <FcGoogle className="text-2xl" /> Continue with Google
+          </button>
+        </form>
 
         {/* divider */}
         <div className="my-6 flex items-center gap-3 text-xs uppercase tracking-wider text-slate-500">

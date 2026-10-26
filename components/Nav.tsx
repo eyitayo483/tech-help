@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FaLaptopCode, FaBars, FaTimes } from "react-icons/fa";
+import { useSession, signOut } from "next-auth/react";
 
 type NavItem = { label: string; href: string };
 
@@ -9,10 +10,13 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About us", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Questions", href: "/questions" },
+  { label: "Ask a Question", href: "/ask" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm">
@@ -36,12 +40,27 @@ export default function Nav() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/signin"
-            className="rounded-xl bg-teal-700 px-5 py-2 font-medium text-white hover:bg-teal-600 transition"
-          >
-            Sign in
-          </Link>
+
+          {session ? (
+            <>
+              <span className="text-slate-900">
+                Hi, {session.user?.name?.split(" ")[0]}
+              </span>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="rounded-xl bg-teal-700 px-5 py-2 font-medium text-white hover:bg-teal-600 transition"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/signin"
+              className="rounded-xl bg-teal-700 px-5 py-2 font-medium text-white hover:bg-teal-600 transition"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
 
         {/* mobile button */}
@@ -67,13 +86,26 @@ export default function Nav() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/signin"
-            onClick={() => setOpen(false)}
-            className="rounded-xl bg-teal-700 px-5 py-3 text-center font-medium text-white"
-          >
-            Sign in
-          </Link>
+
+          {session ? (
+            <button
+              onClick={() => {
+                setOpen(false);
+                signOut({ callbackUrl: "/" });
+              }}
+              className="rounded-xl bg-teal-700 px-5 py-3 text-center font-medium text-white"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              href="/signin"
+              onClick={() => setOpen(false)}
+              className="rounded-xl bg-teal-700 px-5 py-3 text-center font-medium text-white"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       )}
     </nav>
